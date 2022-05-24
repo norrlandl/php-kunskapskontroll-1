@@ -1,12 +1,17 @@
 <?php
 require('dbconnect.php');
 
-
 /**
- * READ (SELECT )
+ * READ AND ORDER
  */
 
-$stmt = $pdo->query("SELECT * FROM posts");  
+ if(isset($_GET['order'])) {
+  $order = $_GET['order'];
+} else {
+  $order = 'id';
+}
+
+$stmt = $pdo->query("SELECT * FROM posts ORDER BY $order");  
 $posts = $stmt->fetchAll();
 
 
@@ -40,18 +45,28 @@ $posts = $stmt->fetchAll();
   <div class="main-container">
   
       <h1>Blogginlägg</h1>
+
+      <div>
+        <h5>Sortera inlägg efter</h5>
+        <form action="" method="GET">
+          <select class="form-select" name="order" aria-label="Default select example" onchange="this.form.submit()">
+            <option value="">Välj</option>
+            <option value="author" <?php if(isset($_GET['order']) && $_GET['order'] == "author"){ echo "selected";} ?> >Author</option>
+            <option value="id" <?php if(isset($_GET['order']) && $_GET['order'] == "id"){ echo "selected";} ?> >Date</option>
+          </select>
+        </form>
+      </div>
     
       <div class="blogposts">
       <?php foreach ($posts as $post) { 
+
         $createDate = new DateTime($post['published_date']);
         $newDate = $createDate->format('Y-m-d');
-
         $string = preg_replace('/\s+?(\S+)?$/', '', substr($post['content'], 0, 100));
 
         ?>
 
           <div class="post">
-              <!-- <h1><?=htmlentities($post['id']) ?></h1> -->
               <h2><?=htmlentities($post['title']) ?></h2>
               <div class="author-date">
                <p><b><?=htmlentities($post['author']) ?></b> <i><?=htmlentities($newDate) ?></i></p>
@@ -64,5 +79,4 @@ $posts = $stmt->fetchAll();
           <?php }?>
         </div>
   </div>
-</body>
-</html>
+  <?php include('footer.php'); ?>

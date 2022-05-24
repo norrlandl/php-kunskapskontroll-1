@@ -35,7 +35,7 @@ $author = "";
 
 if (isset($_POST['addPost'])) {
   $title    = trim($_POST['title']); 
-  $content  = trim($_POST['post']); 
+  $content  = trim($_POST['content']); 
   $author   = trim($_POST['author']); 
 
 // Check if empty
@@ -60,8 +60,11 @@ if (isset($_POST['addPost'])) {
     </div>';
   }
 
-// If not empty create
-  if ($author != "" AND $title != "" AND $content != "") {
+  else 
+
+// // If not empty create
+//   if ($author != "" AND $title != "" AND $content != "") 
+  {
     $sql = "
     INSERT INTO posts (title, content, author) 
     VALUES (:title, :content, :author);
@@ -77,7 +80,13 @@ if (isset($_POST['addPost'])) {
     $stmt->bindParam(":content", $content);
     $stmt->bindParam(":author", $author);
     $stmt->execute();
+
+    $title = "";
+    $content = "";
+    $author = "";
   }
+
+
 
 };
 
@@ -188,6 +197,7 @@ $posts = $stmt->fetchAll();
 <div class="main-container">
   <h1>Admin</h1>
 
+  <h4>Tidigare inlägg</h4>
   <table class="table">
   <thead>
     <tr>
@@ -243,15 +253,15 @@ $posts = $stmt->fetchAll();
 
 <!-- FORM CREATE -->
   <div class="form">
-    <h2>Skapa nytt inlägg</h2>
-      <form action="" method="POST">
+    <h4>Skapa nytt inlägg</h4>
+      <form action="" method="POST" id="form">
         <div class="modal-body form-style">
           <div class="form-group">
             <label  for="recipient-name" class="col-form-label">Title:</label>
             <input  id="test" type="text" class="form-control" name="title" value="<?=htmlentities($title) ?>">
            
             <label for="recipient-name" class="col-form-label">Text:</label>
-            <textarea class="form-control" id="form-height" name="post"><?=htmlentities($content)?></textarea>  
+            <textarea class="form-control" id="form-height" name="content"><?=htmlentities($content)?></textarea>  
                   
             <label for="recipient-name" class="col-form-label">Author:</label>
             <input type="text" class="form-control" name="author" value="<?=htmlentities($author) ?>">
