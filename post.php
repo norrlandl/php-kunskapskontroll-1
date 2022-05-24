@@ -47,7 +47,7 @@ $posts = $stmt->fetchAll();
         </div>
         <p><?=htmlentities($post['content']) ?></p>
             
-        <a href="index.php" class="btn btn-success">Tillbaka</a>
+        <a href="index.php" class="btn btn-success">← Tillbaka</a>
       </div>
 
       <?php }?>

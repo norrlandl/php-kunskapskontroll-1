@@ -7,10 +7,6 @@ $errorAuthor = "";
 $createSuccess = "";
 $updateSuccess = "";
 
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
-
 
 /**
  * DELETE 
@@ -58,13 +54,7 @@ if (isset($_POST['addPost'])) {
     <div class="alert alert-danger error">
     Author missing.
     </div>';
-  }
-
-  else 
-
-// // If not empty create
-//   if ($author != "" AND $title != "" AND $content != "") 
-  {
+  }  else  {
     $sql = "
     INSERT INTO posts (title, content, author) 
     VALUES (:title, :content, :author);
@@ -81,12 +71,12 @@ if (isset($_POST['addPost'])) {
     $stmt->bindParam(":author", $author);
     $stmt->execute();
 
+    // Empty field/textarea
     $title = "";
     $content = "";
     $author = "";
+
   }
-
-
 
 };
 
@@ -154,13 +144,13 @@ if(isset($_GET['order'])) {
   $order = 'id';
 }
 
-
 if(isset($_GET['sort'])) {
   $sort = $_GET['sort'];
 } else {
   $sort = 'ASC';
 } 
 
+// switch between ASC and DESC
 $sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC'; 
 
 $stmt = $pdo->query("SELECT * FROM posts ORDER BY $order $sort");  
@@ -318,17 +308,16 @@ $posts = $stmt->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
 
+
 <!-- jQuery Modal -->
-
 <script>
-
 $('#updateModal').on('show.bs.modal', function (event) {
 
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var post = button.data('post');       // Extract the info from the attribute data-pun
-  var author = button.data('author');        // Extract the info from the attribute data-id
+  var button = $(event.relatedTarget) 
+  var post = button.data('post');      
+  var author = button.data('author');       
   var title = button.data('title'); 
-  var id = button.data('id');        // Extract the info from the attribute data-id
+  var id = button.data('id');        
   console.log(post);
   console.log(author);
   console.log(id);
@@ -343,6 +332,10 @@ $('#updateModal').on('show.bs.modal', function (event) {
 
 </script>
 
+<script>
+    if (window.history.replaceState) 
+      {window.history.replaceState( null, null, window.location.href);}
+</script>
 
 </body>
 </html>

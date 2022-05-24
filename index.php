@@ -11,6 +11,10 @@ require('dbconnect.php');
   $order = 'id';
 }
 
+if(empty($_GET['order'])) {
+  $order = 'id';
+}
+
 $stmt = $pdo->query("SELECT * FROM posts ORDER BY $order");  
 $posts = $stmt->fetchAll();
 
@@ -50,7 +54,7 @@ $posts = $stmt->fetchAll();
         <h5>Sortera inlägg efter</h5>
         <form action="" method="GET">
           <select class="form-select" name="order" aria-label="Default select example" onchange="this.form.submit()">
-            <option value="">Välj</option>
+            <option value=""> Välj</option>
             <option value="author" <?php if(isset($_GET['order']) && $_GET['order'] == "author"){ echo "selected";} ?> >Author</option>
             <option value="id" <?php if(isset($_GET['order']) && $_GET['order'] == "id"){ echo "selected";} ?> >Date</option>
           </select>
@@ -74,7 +78,7 @@ $posts = $stmt->fetchAll();
               <p><?=htmlentities($string ) ?>...
               <br>
               <br>
-              <a href="post.php?id=<?=$post['id'] ?>" class="btn btn-success">Läs mer</a></p>
+              <a href="post.php?id=<?=$post['id'] ?>" class="btn btn-success">Läs mer →</a></p>
           </div>
           <?php }?>
         </div>
