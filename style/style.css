@@ -1,0 +1,104 @@
+.menubar {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: rgb(202, 202, 202);
+  margin-bottom: 50px;
+}
+
+.menu {
+  text-align: right;
+}
+
+.main-container {
+  width: 750px;
+  margin: auto;
+}
+
+.blogposts {
+  margin: 40px 0px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.post {
+  width: 355px;
+  padding: 20px;
+  margin-bottom: 40px;
+  background-color: rgb(245, 245, 245);
+}
+
+.post-singel {
+  width: 100%;
+}
+
+.links {
+  text-align: right;
+}
+
+.form-style {
+  width: 100%;
+  background-color: rgb(245, 245, 245);
+  margin: auto;
+}
+
+h1 {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+thead {
+  font-size: 17px;
+}
+
+tbody {
+  font-size: 14px;
+}
+
+#form-height {
+  min-height: 200px;
+}
+
+a {
+  color: black;
+  font-size: 17px;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+a:hover {
+  color: rgb(239, 116, 116);
+}
+
+.table {
+  width: 100%;
+  margin: 50px 0px;
+}
+
+.form {
+  margin: 50px 0px;
+}
+
+.alert {
+  width: 400px;
+  margin: 10px;
+}
+
+.messages {
+  width: 500px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  width: 150px;
+  text-align: center;
+}
+
+.success {
+  width: 250px;
+  text-align: center;
+}
