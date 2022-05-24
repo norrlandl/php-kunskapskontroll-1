@@ -159,8 +159,7 @@ if(isset($_GET['sort'])) {
 
   
 $sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC'; 
-
-//Fråga 1:  Vart ska jag lägga den här koden???!?!
+//Fråga 1:  Vart ska jag lägga den här koden för att få det att funka???!?!
 
 
 echo "<pre>";
@@ -267,7 +266,8 @@ $posts = $stmt->fetchAll();
            
             <label for="recipient-name" class="col-form-label">Text:</label>
             <textarea class="form-control" id="form-height" name="post">
-              <?=htmlentities($post) ?>  
+              <?=htmlentities($post) ?>
+<!-- Fråga 2:  Vad är fel? -->
             </textarea>  
                   
             <label for="recipient-name" class="col-form-label">Author:</label>
