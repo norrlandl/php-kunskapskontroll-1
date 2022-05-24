@@ -7,11 +7,9 @@ $errorAuthor = "";
 $createSuccess = "";
 $updateSuccess = "";
 
-
-
-echo "<pre>";
-print_r($_GET);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_GET);
+// echo "</pre>";
 
 
 /**
@@ -32,12 +30,12 @@ echo "</pre>";
  */
 
 $title = "";
-$post = "";
+$content = "";
 $author = "";
 
 if (isset($_POST['addPost'])) {
   $title    = trim($_POST['title']); 
-  $post     = trim($_POST['post']); 
+  $content  = trim($_POST['post']); 
   $author   = trim($_POST['author']); 
 
 // Check if empty
@@ -48,7 +46,7 @@ if (isset($_POST['addPost'])) {
     </div>';
   }
 
-  if (empty($post)) {
+  if (empty($content)) {
     $errorText = '
     <div class="alert alert-danger error">
     Text missing.
@@ -63,7 +61,7 @@ if (isset($_POST['addPost'])) {
   }
 
 // If not empty create
-  if ($author != "" AND $title != "" AND $post != "") {
+  if ($author != "" AND $title != "" AND $content != "") {
     $sql = "
     INSERT INTO posts (title, content, author) 
     VALUES (:title, :content, :author);
@@ -76,7 +74,7 @@ if (isset($_POST['addPost'])) {
   
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(":title", $title);
-    $stmt->bindParam(":content", $post);
+    $stmt->bindParam(":content", $content);
     $stmt->bindParam(":author", $author);
     $stmt->execute();
   }
@@ -152,21 +150,9 @@ if(isset($_GET['sort'])) {
   $sort = $_GET['sort'];
 } else {
   $sort = 'ASC';
-  echo "<pre>";
-  print_r($sort);
-  echo "</pre>";
 } 
 
-  
 $sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC'; 
-//Fråga 1:  Vart ska jag lägga den här koden för att få det att funka???!?!
-
-
-echo "<pre>";
-print_r($sort);
-echo "</pre>";
-
-
 
 $stmt = $pdo->query("SELECT * FROM posts ORDER BY $order $sort");  
 $posts = $stmt->fetchAll();
@@ -205,10 +191,10 @@ $posts = $stmt->fetchAll();
   <table class="table">
   <thead>
     <tr>
-      <th><a href='?order=title&sort=$sort'>Title<i></i></a></th>
-      <th><a href='?order=author&sort=$sort'>Author</a></th>
+      <th><a href='?order=title&sort=<?=$sort?>'>Title<i></i></a></th>
+      <th><a href='?order=author&sort=<?=$sort?>'>Author</a></th>
       <th>Inlägg</th>
-      <th><a href='?order=id&sort=$sort'>Date</a></th>
+      <th><a href='?order=id&sort=<?=$sort?>'>Date</a></th>
       <th></th>
       <th></th>
     </tr>
@@ -265,10 +251,7 @@ $posts = $stmt->fetchAll();
             <input  id="test" type="text" class="form-control" name="title" value="<?=htmlentities($title) ?>">
            
             <label for="recipient-name" class="col-form-label">Text:</label>
-            <textarea class="form-control" id="form-height" name="post">
-              <?=htmlentities($post) ?>
-<!-- Fråga 2:  Vad är fel? -->
-            </textarea>  
+            <textarea class="form-control" id="form-height" name="post"><?=htmlentities($content)?></textarea>  
                   
             <label for="recipient-name" class="col-form-label">Author:</label>
             <input type="text" class="form-control" name="author" value="<?=htmlentities($author) ?>">
