@@ -7,6 +7,8 @@ $errorAuthor = "";
 $createSuccess = "";
 $updateSuccess = "";
 
+
+
 echo "<pre>";
 print_r($_GET);
 echo "</pre>";
@@ -29,11 +31,14 @@ echo "</pre>";
  * CREATE 
  */
 
+$title = "";
+$post = "";
+$author = "";
 
 if (isset($_POST['addPost'])) {
-  $post = trim($_POST['post']); 
-  $title = trim($_POST['title']); 
-  $author = trim($_POST['author']); 
+  $title    = trim($_POST['title']); 
+  $post     = trim($_POST['post']); 
+  $author   = trim($_POST['author']); 
 
 // Check if empty
   if(empty($title)) {
@@ -85,8 +90,8 @@ if (isset($_POST['addPost'])) {
 
 if (isset($_POST['editPost'])) {
 
-$post = trim($_POST['post']); 
 $title = trim($_POST['title']); 
+$post = trim($_POST['post']); 
 $author = trim($_POST['author']); 
 
   if(empty($title)) {
@@ -142,6 +147,7 @@ if(isset($_GET['order'])) {
   $order = 'id';
 }
 
+
 if(isset($_GET['sort'])) {
   $sort = $_GET['sort'];
 } else {
@@ -151,14 +157,21 @@ if(isset($_GET['sort'])) {
   echo "</pre>";
 } 
 
+  
+$sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC'; 
+
+//Fråga 1:  Vart ska jag lägga den här koden???!?!
+
+
 echo "<pre>";
 print_r($sort);
 echo "</pre>";
 
-$sort == 'DESC' ? $sort = 'ASC' : $sort = 'DESC';
+
 
 $stmt = $pdo->query("SELECT * FROM posts ORDER BY $order $sort");  
 $posts = $stmt->fetchAll();
+
 
 ?>
 
@@ -203,7 +216,8 @@ $posts = $stmt->fetchAll();
   </thead>
   <tbody>
 
-    <?php foreach ($posts as $post) :
+
+  <?php foreach ($posts as $post) :
 
       $createDate = new DateTime($post['published_date']);
       $newDate = $createDate->format('Y-m-d');
@@ -249,13 +263,15 @@ $posts = $stmt->fetchAll();
         <div class="modal-body form-style">
           <div class="form-group">
             <label  for="recipient-name" class="col-form-label">Title:</label>
-            <input  id="test" type="text" class="form-control" name="title">
+            <input  id="test" type="text" class="form-control" name="title" value="<?=htmlentities($title) ?>">
            
             <label for="recipient-name" class="col-form-label">Text:</label>
-            <textarea class="form-control" id="form-height" name="post" ></textarea>  
+            <textarea class="form-control" id="form-height" name="post">
+              <?=htmlentities($post) ?>  
+            </textarea>  
                   
             <label for="recipient-name" class="col-form-label">Author:</label>
-            <input type="text" class="form-control" name="author">
+            <input type="text" class="form-control" name="author" value="<?=htmlentities($author) ?>">
       
             <input type="hidden" name="id">
         </div>
