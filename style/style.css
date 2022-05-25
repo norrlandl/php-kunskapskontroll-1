@@ -100,14 +100,14 @@ a:hover {
 }
 
 .messages {
-  width: 500px;
+  width: 550px;
   margin: auto;
   display: flex;
   justify-content: center;
 }
 
 .error {
-  width: 150px;
+  width: 165px;
   text-align: center;
 }
 

@@ -16,7 +16,7 @@ $success = "";
 
    $success = '
    <div class="alert alert-success success">
-   Ditt inlägg raderades!
+   Ditt inlägg är raderat!
    </div>';
 
    $stmt = $pdo->prepare($sql);
@@ -42,21 +42,21 @@ if (isset($_POST['addPost'])) {
   if(empty($title_create)) {
     $errorTitle = '
     <div class="alert alert-danger error">
-    Title missing.
+    Titel saknas
     </div>';
   }
 
   if (empty($content_create)) {
     $errorText = '
     <div class="alert alert-danger error">
-    Text missing.
+    Text saknas
     </div>';
   }  
   
   if(empty($author_create)) {
     $errorAuthor = '
     <div class="alert alert-danger error">
-    Author missing.
+    Författare saknas
     </div>';
   }  
   
@@ -100,21 +100,21 @@ $author = trim($_POST['author']);
   if(empty($title)) {
     $errorTitle = '
     <div class="alert alert-danger error">
-    Title missing.
+    Titel saknas
     </div>';
   }
 
   if (empty($content)) {
     $errorText = '
     <div class="alert alert-danger error">
-    Text missing.
+    Text saknas
     </div>';
   }  
 
   if(empty($author)) {
     $errorAuthor = '
     <div class="alert alert-danger error">
-    Author missing.
+    Författare saknas
     </div>';
   } 
   
@@ -197,10 +197,10 @@ $posts = $stmt->fetchAll();
   <table class="table">
   <thead>
     <tr>
-      <th><a href='?order=title&sort=<?=$sort?>'>Title<i></i></a></th>
-      <th><a href='?order=author&sort=<?=$sort?>'>Author</a></th>
-      <th>Inlägg</th>
-      <th><a href='?order=id&sort=<?=$sort?>'>Date</a></th>
+      <th><a href='?order=title&sort=<?=$sort?>'>Titel<i></i></a></th>
+      <th><a href='?order=author&sort=<?=$sort?>'>Författare</a></th>
+      <th>Text</th>
+      <th><a href='?order=id&sort=<?=$sort?>'>Datum</a></th>
       <th></th>
       <th></th>
     </tr>
@@ -252,13 +252,13 @@ $posts = $stmt->fetchAll();
       <form action="" method="POST" id="form">
         <div class="modal-body form-style">
           <div class="form-group">
-            <label  for="recipient-name" class="col-form-label">Title:</label>
+            <label  for="recipient-name" class="col-form-label">Titel:</label>
             <input  id="test" type="text" class="form-control" name="title" value="<?=htmlentities($title_create) ?>">
            
             <label for="recipient-name" class="col-form-label">Text:</label>
             <textarea class="form-control" id="form-height" name="content"><?=htmlentities($content_create)?></textarea>  
                   
-            <label for="recipient-name" class="col-form-label">Author:</label>
+            <label for="recipient-name" class="col-form-label">Författare:</label>
             <input type="text" class="form-control" name="author" value="<?=htmlentities($author_create) ?>">
       
             <input type="hidden" name="id">
@@ -286,11 +286,11 @@ $posts = $stmt->fetchAll();
           <form action="" method="POST">
             <div class="modal-body">
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Title:</label>
+                <label for="recipient-name" class="col-form-label">Titel:</label>
                 <input type="text" class="form-control" name="title">
                 <label for="recipient-name" class="col-form-label">Text:</label>
                 <textarea class="form-control" id="form-height" name="content" ></textarea>   
-                <label for="recipient-name" class="col-form-label">Author:</label>
+                <label for="recipient-name" class="col-form-label">Författare:</label>
                 <input type="text" class="form-control" name="author">
                 <input type="hidden" name="id">
               </div>

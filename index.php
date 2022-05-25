@@ -55,8 +55,8 @@ $posts = $stmt->fetchAll();
         <form action="" method="GET">
           <select class="form-select" name="order" aria-label="Default select example" onchange="this.form.submit()">
             <option value=""> Välj</option>
-            <option value="author" <?php if(isset($_GET['order']) && $_GET['order'] == "author"){ echo "selected";} ?> >Author </option>
-            <option value="id" <?php if(isset($_GET['order']) && $_GET['order'] == "id"){ echo "selected";} ?> >Date </option>
+            <option value="author" <?php if(isset($_GET['order']) && $_GET['order'] == "author"){ echo "selected";} ?> >Författare </option>
+            <option value="id" <?php if(isset($_GET['order']) && $_GET['order'] == "id"){ echo "selected";} ?> >Datum </option>
           </select>
         </form>
       </div>
