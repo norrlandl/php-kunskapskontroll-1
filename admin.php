@@ -77,7 +77,7 @@ if (isset($_POST['addPost'])) {
     $stmt->bindParam(":author", $author_create);
     $stmt->execute();
 
-    // Empty field/textarea
+// Empty input/textarea
     $title_create = "";
     $content_create = "";
     $author_create = "";
@@ -167,7 +167,6 @@ $posts = $stmt->fetchAll();
 
 
 <!-- HTML -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,14 +220,14 @@ $posts = $stmt->fetchAll();
         <td><?=htmlentities(substr($post['content'], 0, 15)) ?></td>
         <td><i><?=htmlentities($newDate) ?></i></td>
         <td>
-<!-- // DELETE -->
+<!-- Delete -->
         <form action="" method="POST">
           <input type="hidden" name="postId" value="<?=$post['id']?>">
           <input type="submit" class="btn btn-secondary" name="deletePost" value="Delete">
         </form>
         </td>
         <td>
-<!-- // EDIT -->
+<!-- Update -->
         <button type="button" data-toggle="modal" class="btn btn-warning float-end" data-target="#updateModal" data-content="<?=htmlentities($post['content'])?>" data-title="<?=htmlentities($post['title'])?>"
         data-author="<?=htmlentities($post['author'])?>" data-id="<?=htmlentities($post['id'])?>">Update</button>
 
@@ -246,7 +245,7 @@ $posts = $stmt->fetchAll();
 <?=$success?>
 </div>
 
-<!-- FORM CREATE -->
+<!-- FORM create -->
   <div class="form">
     <h4>Skapa nytt inlägg</h4>
       <form action="" method="POST" id="form">
@@ -272,7 +271,7 @@ $posts = $stmt->fetchAll();
   </div>
 
 
-<!-- MODAL UPDATE -->
+<!-- MODAL update -->
 <div id="updateModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 
   <div class="modal-dialog modal-lg" role="document">
@@ -333,6 +332,7 @@ $('#updateModal').on('show.bs.modal', function (event) {
 
 </script>
 
+<!-- Prevent +1(form) on reload page -->
 <script>
     if (window.history.replaceState) 
       {window.history.replaceState( null, null, window.location.href);}

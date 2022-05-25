@@ -2,7 +2,7 @@
 require('dbconnect.php');
 
 /**
- * READ AND ORDER
+ * SELECT & ORDER
  */
 
  if(isset($_GET['order'])) {
