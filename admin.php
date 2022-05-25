@@ -4,8 +4,7 @@ require('dbconnect.php');
 $errorText = "";
 $errorTitle = "";
 $errorAuthor = "";
-$createSuccess = "";
-$updateSuccess = "";
+$success = "";
 
 
 /**
@@ -14,6 +13,11 @@ $updateSuccess = "";
 
  if (isset($_POST['deletePost'])) {
    $sql = "DELETE FROM posts WHERE id = :id;";
+
+   $success = '
+   <div class="alert alert-success success">
+   Ditt inlägg raderades!
+   </div>';
 
    $stmt = $pdo->prepare($sql);
    $stmt->bindParam(":id", $_POST['postId']);
@@ -62,7 +66,7 @@ if (isset($_POST['addPost'])) {
     VALUES (:title, :content, :author);
     ";
 
-    $createSuccess = '
+    $success = '
     <div class="alert alert-success success">
     Ditt inlägg är postat!
     </div>';
@@ -90,7 +94,7 @@ if (isset($_POST['addPost'])) {
 if (isset($_POST['editPost'])) {
 
 $title = trim($_POST['title']); 
-$post = trim($_POST['post']); 
+$content = trim($_POST['content']); 
 $author = trim($_POST['author']); 
 
   if(empty($title)) {
@@ -100,7 +104,7 @@ $author = trim($_POST['author']);
     </div>';
   }
 
-  if (empty($post)) {
+  if (empty($content)) {
     $errorText = '
     <div class="alert alert-danger error">
     Text missing.
@@ -114,7 +118,7 @@ $author = trim($_POST['author']);
     </div>';
   } 
   
-  if ($author != "" AND $title != "" AND $post != "") {
+  if ($author != "" AND $title != "" AND $content != "") {
     $sql = "
     UPDATE posts 
     SET   content = :editContent,
@@ -122,7 +126,7 @@ $author = trim($_POST['author']);
           author = :editAuthor
     WHERE id = :id;";
 
-    $updateSuccess = '
+    $success = '
     <div class="alert alert-success success">
     Ditt inlägg är uppdaterat!
     </div>';
@@ -130,7 +134,7 @@ $author = trim($_POST['author']);
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(":id", $_POST['id']);
     $stmt->bindParam(":editTitle", $title);
-    $stmt->bindParam(":editContent", $post);
+    $stmt->bindParam(":editContent", $content);
     $stmt->bindParam(":editAuthor", $author);
     $stmt->execute();
   }
@@ -225,7 +229,7 @@ $posts = $stmt->fetchAll();
         </td>
         <td>
 <!-- // EDIT -->
-        <button type="button" data-toggle="modal" class="btn btn-warning float-end" data-target="#updateModal" data-post="<?=htmlentities($post['content'])?>" data-title="<?=htmlentities($post['title'])?>"
+        <button type="button" data-toggle="modal" class="btn btn-warning float-end" data-target="#updateModal" data-content="<?=htmlentities($post['content'])?>" data-title="<?=htmlentities($post['title'])?>"
         data-author="<?=htmlentities($post['author'])?>" data-id="<?=htmlentities($post['id'])?>">Update</button>
 
         </td>
@@ -239,8 +243,7 @@ $posts = $stmt->fetchAll();
 <?=$errorTitle?>
 <?=$errorText?>
 <?=$errorAuthor?> 
-<?=$createSuccess?>
-<?=$updateSuccess?>
+<?=$success?>
 </div>
 
 <!-- FORM CREATE -->
@@ -286,7 +289,7 @@ $posts = $stmt->fetchAll();
                 <label for="recipient-name" class="col-form-label">Title:</label>
                 <input type="text" class="form-control" name="title">
                 <label for="recipient-name" class="col-form-label">Text:</label>
-                <textarea class="form-control" id="form-height" name="post" ></textarea>   
+                <textarea class="form-control" id="form-height" name="content" ></textarea>   
                 <label for="recipient-name" class="col-form-label">Author:</label>
                 <input type="text" class="form-control" name="author">
                 <input type="hidden" name="id">
@@ -316,13 +319,13 @@ $posts = $stmt->fetchAll();
 $('#updateModal').on('show.bs.modal', function (event) {
 
   var button = $(event.relatedTarget) 
-  var post = button.data('post');      
+  var content = button.data('content');      
   var author = button.data('author');       
   var title = button.data('title'); 
   var id = button.data('id');        
   
   var modal = $(this)
-  modal.find('.modal-body textarea[name="post"]').val(post);
+  modal.find('.modal-body textarea[name="content"]').val(content);
   modal.find('.modal-body input[name="id"]').val(id);
   modal.find('.modal-body input[name="author"]').val(author);
   modal.find('.modal-body input[name="title"]').val(title);
