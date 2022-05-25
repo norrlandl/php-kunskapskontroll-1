@@ -199,7 +199,6 @@ $posts = $stmt->fetchAll();
     <tr>
       <th><a href='?order=title&sort=<?=$sort?>'>Titel<i></i></a></th>
       <th><a href='?order=author&sort=<?=$sort?>'>Författare</a></th>
-      <!-- <th>Text</th> -->
       <th><a href='?order=content&sort=<?=$sort?>'>Text</a></th>
       <th><a href='?order=id&sort=<?=$sort?>'>Datum</a></th>
       <th></th>
