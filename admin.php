@@ -54,7 +54,9 @@ if (isset($_POST['addPost'])) {
     <div class="alert alert-danger error">
     Author missing.
     </div>';
-  }  else  {
+  }  
+  
+  elseif ($title != "" AND $content != "" AND $author != "")   {
     $sql = "
     INSERT INTO posts (title, content, author) 
     VALUES (:title, :content, :author);
