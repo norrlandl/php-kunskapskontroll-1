@@ -25,38 +25,38 @@ $updateSuccess = "";
  * CREATE 
  */
 
-$title = "";
-$content = "";
-$author = "";
+$title_create = "";
+$content_create = "";
+$author_create = "";
 
 if (isset($_POST['addPost'])) {
-  $title    = trim($_POST['title']); 
-  $content  = trim($_POST['content']); 
-  $author   = trim($_POST['author']); 
+  $title_create    = trim($_POST['title']); 
+  $content_create  = trim($_POST['content']); 
+  $author_create   = trim($_POST['author']); 
 
 // Check if empty
-  if(empty($title)) {
+  if(empty($title_create)) {
     $errorTitle = '
     <div class="alert alert-danger error">
     Title missing.
     </div>';
   }
 
-  if (empty($content)) {
+  if (empty($content_create)) {
     $errorText = '
     <div class="alert alert-danger error">
     Text missing.
     </div>';
   }  
   
-  if(empty($author)) {
+  if(empty($author_create)) {
     $errorAuthor = '
     <div class="alert alert-danger error">
     Author missing.
     </div>';
   }  
   
-  elseif ($title != "" AND $content != "" AND $author != "")   {
+  elseif ($title_create != "" AND $content_create != "" AND $author_create != "")   {
     $sql = "
     INSERT INTO posts (title, content, author) 
     VALUES (:title, :content, :author);
@@ -68,15 +68,15 @@ if (isset($_POST['addPost'])) {
     </div>';
   
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":title", $title);
-    $stmt->bindParam(":content", $content);
-    $stmt->bindParam(":author", $author);
+    $stmt->bindParam(":title", $title_create);
+    $stmt->bindParam(":content", $content_create);
+    $stmt->bindParam(":author", $author_create);
     $stmt->execute();
 
     // Empty field/textarea
-    $title = "";
-    $content = "";
-    $author = "";
+    $title_create = "";
+    $content_create = "";
+    $author_create = "";
 
   }
 
@@ -129,9 +129,9 @@ $author = trim($_POST['author']);
   
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(":id", $_POST['id']);
-    $stmt->bindParam(":editContent", $_POST['post']);
-    $stmt->bindParam(":editTitle", $_POST['title']);
-    $stmt->bindParam(":editAuthor", $_POST['author']);
+    $stmt->bindParam(":editTitle", $title);
+    $stmt->bindParam(":editContent", $post);
+    $stmt->bindParam(":editAuthor", $author);
     $stmt->execute();
   }
 }
@@ -250,13 +250,13 @@ $posts = $stmt->fetchAll();
         <div class="modal-body form-style">
           <div class="form-group">
             <label  for="recipient-name" class="col-form-label">Title:</label>
-            <input  id="test" type="text" class="form-control" name="title" value="<?=htmlentities($title) ?>">
+            <input  id="test" type="text" class="form-control" name="title" value="<?=htmlentities($title_create) ?>">
            
             <label for="recipient-name" class="col-form-label">Text:</label>
-            <textarea class="form-control" id="form-height" name="content"><?=htmlentities($content)?></textarea>  
+            <textarea class="form-control" id="form-height" name="content"><?=htmlentities($content_create)?></textarea>  
                   
             <label for="recipient-name" class="col-form-label">Author:</label>
-            <input type="text" class="form-control" name="author" value="<?=htmlentities($author) ?>">
+            <input type="text" class="form-control" name="author" value="<?=htmlentities($author_create) ?>">
       
             <input type="hidden" name="id">
         </div>
@@ -320,10 +320,6 @@ $('#updateModal').on('show.bs.modal', function (event) {
   var author = button.data('author');       
   var title = button.data('title'); 
   var id = button.data('id');        
-  console.log(post);
-  console.log(author);
-  console.log(id);
-  
   
   var modal = $(this)
   modal.find('.modal-body textarea[name="post"]').val(post);
