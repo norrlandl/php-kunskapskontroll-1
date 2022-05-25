@@ -199,7 +199,8 @@ $posts = $stmt->fetchAll();
     <tr>
       <th><a href='?order=title&sort=<?=$sort?>'>Titel<i></i></a></th>
       <th><a href='?order=author&sort=<?=$sort?>'>Författare</a></th>
-      <th>Text</th>
+      <!-- <th>Text</th> -->
+      <th><a href='?order=content&sort=<?=$sort?>'>Text</a></th>
       <th><a href='?order=id&sort=<?=$sort?>'>Datum</a></th>
       <th></th>
       <th></th>
@@ -278,7 +279,7 @@ $posts = $stmt->fetchAll();
   <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Update post</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Uppdatera inlägg</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

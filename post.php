@@ -32,16 +32,16 @@ $posts = $stmt->fetchAll();
     </div>
   </div>
 <div class="main-container">
-<h1>Singel post</h1>
   <?php foreach ($posts as $post) { 
-     $createDate = new DateTime($post['published_date']);
-     $newDate = $createDate->format('Y-m-d');
+    $createDate = new DateTime($post['published_date']);
+    $newDate = $createDate->format('Y-m-d');
     
     ?>
+    <h1><?=htmlentities($post['title']) ?></h1>
     
     <div class="post post-singel">
         <!-- <h1><?=htmlentities($post['id']) ?></h1> -->
-        <h2><?=htmlentities($post['title']) ?></h2>
+        <!-- <h2><?=htmlentities($post['title']) ?></h2> -->
         <div class="author-date">
         <p><b><?=htmlentities($post['author']) ?></b> <i><?=htmlentities($newDate) ?></i></p>
         </div>
